@@ -1,0 +1,31 @@
+@model TodoItem
+
+@{
+    ViewData["Title"] = "Task Details";
+}
+
+<h1>Task Details</h1>
+
+<div class="details-card">
+    <dl>
+        <dt>Title</dt>
+        <dd>@Model.Title</dd>
+
+        <dt>Description</dt>
+        <dd>@(string.IsNullOrWhiteSpace(Model.Description) ? "—" : Model.Description)</dd>
+
+        <dt>Status</dt>
+        <dd>@(Model.IsComplete ? "✅ Complete" : "⬜ Pending")</dd>
+
+        <dt>Due Date</dt>
+        <dd>@(Model.DueDate?.ToString("MMMM dd, yyyy") ?? "—")</dd>
+
+        <dt>Created</dt>
+        <dd>@Model.CreatedAt.ToString("MMMM dd, yyyy 'at' h:mm tt")</dd>
+    </dl>
+</div>
+
+<div class="form-actions">
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+</div>

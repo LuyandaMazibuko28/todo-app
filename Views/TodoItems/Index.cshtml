@@ -1,0 +1,52 @@
+@model IEnumerable<TodoItem>
+
+@{
+    ViewData["Title"] = "My Tasks";
+}
+
+<div class="page-header">
+    <h1>My Tasks</h1>
+    <a class="btn btn-primary" asp-action="Create">+ New Task</a>
+</div>
+
+@if (!Model.Any())
+{
+    <p class="empty-state">No tasks yet. Create your first one!</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Due Date</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="@(item.IsComplete ? "row-complete" : "")">
+                    <td>
+                        <form asp-action="ToggleComplete" asp-route-id="@item.Id" method="post" class="inline-form">
+                            <button type="submit" class="checkbox-btn" title="Toggle complete">
+                                @(item.IsComplete ? "✅" : "⬜")
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+                    </td>
+                    <td>@(item.DueDate?.ToString("MMM dd, yyyy") ?? "—")</td>
+                    <td>@item.CreatedAt.ToString("MMM dd, yyyy")</td>
+                    <td class="actions">
+                        <a class="btn btn-small" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-small btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

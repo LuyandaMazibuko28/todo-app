@@ -1,0 +1,30 @@
+@model TodoItem
+
+@{
+    ViewData["Title"] = "Delete Task";
+}
+
+<h1>Delete Task</h1>
+
+<p class="warning-text">Are you sure you want to delete this task? This cannot be undone.</p>
+
+<div class="details-card">
+    <dl>
+        <dt>Title</dt>
+        <dd>@Model.Title</dd>
+
+        <dt>Description</dt>
+        <dd>@(string.IsNullOrWhiteSpace(Model.Description) ? "—" : Model.Description)</dd>
+
+        <dt>Due Date</dt>
+        <dd>@(Model.DueDate?.ToString("MMMM dd, yyyy") ?? "—")</dd>
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-actions">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
