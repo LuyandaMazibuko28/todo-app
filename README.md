@@ -46,10 +46,5 @@ TodoApp/
 └── appsettings.json
 ```
 
-## Extending it
-Some easy next steps if you want to keep playing with it:
-- Add categories/tags (many-to-many relationship)
-- Add search/filter on the Index page
-- Swap SQLite for SQL Server by changing the connection string and `UseSqlite` → `UseSqlServer`
-- Add a REST API alongside the MVC views (add a `[ApiController]` alongside the existing controller)
+## longside the MVC views (add a `[ApiController]` alongside the existing controller)
 - Add user accounts with ASP.NET Core Identity so tasks are per-user
